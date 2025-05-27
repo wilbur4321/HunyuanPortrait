@@ -9,12 +9,15 @@
 <a href='https://kkakkkka.github.io/HunyuanPortrait/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>  ![visitors](https://visitor-badge.laobi.icu/badge?page_id=Tencent-Hunyuan.HunyuanPortrait&left_color=green&right_color=red)  [![GitHub](https://img.shields.io/github/stars/Tencent-Hunyuan/HunyuanPortrait?style=social)](https://github.com/Tencent-Hunyuan/HunyuanPortrait) 
 </div>
 
+## 🧩 Community Contributions
+If you develop/use HunyuanPortrait in your projects, welcome to let us know/sumbit a PR! 💖
+
 ## 📜 Requirements
 * An NVIDIA 3090 GPU with CUDA support is required. 
   * The model is tested on a single 24G GPU.
 * Tested operating system: Linux
 
-## Installation
+## 📥 Installation
 
 ```bash
 git clone https://github.com/Tencent-Hunyuan/HunyuanPortrait
@@ -22,7 +25,7 @@ pip3 install torch torchvision torchaudio
 pip3 install -r requirements.txt
 ```
 
-## Download
+## 🛠️ Download
 
 All models are stored in `pretrained_weights` by default:
 ```bash
@@ -57,7 +60,7 @@ And the file structure is as follows:
 └── yoloface_v5m.pt
 ```
 
-## Run
+## ▶️ Run
 
 🔥 Live your portrait by executing `bash demo.sh`
 
@@ -71,10 +74,10 @@ python inference.py \
     --image_path $image_path
 ```
 
-## Framework 
+## 🏗️ Framework 
 <img src="assets/pics/pipeline.png">
 
-## TL;DR:
+## ⏳ TL;DR:
 HunyuanPortrait is a diffusion-based framework for generating lifelike, temporally consistent portrait animations by decoupling identity and motion using pre-trained encoders. It encodes driving video expressions/poses into implicit control signals, injects them via attention-based adapters into a stabilized diffusion backbone, enabling detailed and style-flexible animation from a single reference image. The method outperforms existing approaches in controllability and coherence.
 
 # 🖼 Gallery
@@ -83,7 +86,7 @@ Some results of portrait animation using HunyuanPortrait.
 
 More results can be found on our [Project page](https://kkakkkka.github.io/HunyuanPortrait/).
 
-## Cases
+## 📂 Cases
 
 <table>
 <tr>
@@ -110,25 +113,25 @@ https://github.com/user-attachments/assets/bea095c7-9668-4cfd-a22d-36bf3689cd8a
 </tr>
 </table>
 
-## Portrait Singing
+## 🎤 Portrait Singing
 
 https://github.com/user-attachments/assets/4b963f42-48b2-4190-8d8f-bbbe38f97ac6
 
-## Portrait Acting
+## 🎬 Portrait Acting
 
 https://github.com/user-attachments/assets/48c8c412-7ff9-48e3-ac02-48d4c5a0633a
 
-## Portrait Making Face
+## 🤪 Portrait Making Face
 
 https://github.com/user-attachments/assets/bdd4c1db-ed90-4a24-a3c6-3ea0b436c227
 
-## Acknowledgements
+## 💖 Acknowledgements
 
 The code is based on [SVD](https://github.com/Stability-AI/generative-models), [DiNOv2](https://github.com/facebookresearch/dinov2), [Arc2Face](https://github.com/foivospar/Arc2Face), [YoloFace](https://github.com/deepcam-cn/yolov5-face). We thank the authors for their open-sourced code and encourage users to cite their works when applicable.
 Stable Video Diffusion is licensed under the Stable Video Diffusion Research License, Copyright (c) Stability AI Ltd. All Rights Reserved.
 This codebase is intended solely for academic purposes.
 
-# 🎼 Citation 
+# 🔗 Citation 
 If you think this project is helpful, please feel free to leave a star⭐️⭐️⭐️ and cite our paper:
 ```bibtex
 @article{xu2025hunyuanportrait,
