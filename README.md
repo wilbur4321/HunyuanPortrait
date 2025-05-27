@@ -6,7 +6,8 @@
 <h2><font color="red"> HunyuanPortrait </font></center> <br> <center>Implicit Condition Control for Enhanced Portrait Animation</h2>
 
 <a href='https://arxiv.org/abs/2503.18860'><img src='https://img.shields.io/badge/ArXiv-2503.18860-red'></a> 
-<a href='https://kkakkkka.github.io/HunyuanPortrait/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>  ![visitors](https://visitor-badge.laobi.icu/badge?page_id=Tencent-Hunyuan.HunyuanPortrait&left_color=green&right_color=red)  [![GitHub](https://img.shields.io/github/stars/Tencent-Hunyuan/HunyuanPortrait?style=social)](https://github.com/Tencent-Hunyuan/HunyuanPortrait) 
+<a href='https://kkakkkka.github.io/HunyuanPortrait/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
+<a href='https://huggingface.co/tencent/HunyuanPortrait'><img src="https://img.shields.io/static/v1?label=HunyuanPortrait&message=HuggingFace&color=yellow"></a>
 </div>
 
 ## 🧩 Community Contributions
