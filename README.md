@@ -7,7 +7,7 @@
 
 <a href='https://arxiv.org/abs/2503.18860'><img src='https://img.shields.io/badge/ArXiv-2503.18860-red'></a> 
 <a href='https://kkakkkka.github.io/HunyuanPortrait/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
-<a href='https://huggingface.co/tencent/HunyuanPortrait'><img src="https://img.shields.io/static/v1?label=HunyuanPortrait&message=HuggingFace&color=yellow"></a>
+<a href='https://huggingface.co/tencent/HunyuanPortrait'><img src="https://img.shields.io/static/v1?label=HuggingFace&message=HunyuanPortrait&color=yellow"></a>
 </div>
 
 ## 🧩 Community Contributions
