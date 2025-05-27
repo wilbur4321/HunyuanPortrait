@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/pics/logo.png"  height=100>
+</p>
+
 <div align="center">
 <h2><font color="red"> HunyuanPortrait </font></center> <br> <center>Implicit Condition Control for Enhanced Portrait Animation</h2>
 
