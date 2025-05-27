@@ -81,7 +81,7 @@ HunyuanPortrait is a diffusion-based framework for generating lifelike, temporal
 
 Some results of portrait animation using HunyuanPortrait.
 
-More results can be found on our [Project page](https://https://kkakkkka.github.io/HunyuanPortrait/).
+More results can be found on our [Project page](https://kkakkkka.github.io/HunyuanPortrait/).
 
 ## Cases
 
