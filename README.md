@@ -2,9 +2,12 @@
   <img src="assets/pics/logo.png"  height=100>
 </p>
 
-<div align="center">
-<h2><font color="red"> HunyuanPortrait </font></center> <br> <center>Implicit Condition Control for Enhanced Portrait Animation</h2>
 
+# **HunyuanPortrait** 
+
+> [**HunyuanPortrait: Implicit Condition Control for Enhanced Portrait Animation**](https://arxiv.org/pdf/2503.18860) <be>
+
+<div align="center">
 <a href='https://arxiv.org/abs/2503.18860'><img src='https://img.shields.io/badge/ArXiv-2503.18860-red'></a> 
 <a href='https://kkakkkka.github.io/HunyuanPortrait/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 <a href='https://huggingface.co/tencent/HunyuanPortrait'><img src="https://img.shields.io/static/v1?label=HuggingFace&message=HunyuanPortrait&color=yellow"></a>
@@ -18,7 +21,7 @@ If you develop/use HunyuanPortrait in your projects, welcome to let us know/sumb
   * The model is tested on a single 24G GPU.
 * Tested operating system: Linux
 
-## 📥 Installation
+## 🛠️ Installation
 
 ```bash
 git clone https://github.com/Tencent-Hunyuan/HunyuanPortrait
@@ -26,7 +29,7 @@ pip3 install torch torchvision torchaudio
 pip3 install -r requirements.txt
 ```
 
-## 🛠️ Download
+## 📥 Download
 
 All models are stored in `pretrained_weights` by default:
 ```bash
@@ -73,6 +76,12 @@ python inference.py \
     --config config/hunyuan-portrait.yaml \
     --video_path $video_path \
     --image_path $image_path
+```
+
+Or use a Gradio Server:
+
+```bash
+python gradio_app.py
 ```
 
 ## 🏗️ Framework 
