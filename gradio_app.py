@@ -189,7 +189,7 @@ def generate_video_from_image_and_video(image, video_path):
         lmk_list = sample['lmk_list']
 
         if not cfg.use_arcface or arcface_img_data is None or arcface_session is None:
-            arcface_embeddings = np.zeros((1, cfg.arcface_img_size)) # Ensure consistent shape as per original code
+            arcface_embeddings = np.zeros((1, cfg.arcface_img_size))
         else:
             arcface_img_data_np = arcface_img_data.transpose((2, 0, 1)).astype(np.float32)[np.newaxis, ...]
             arcface_embeddings = arcface_session.run(None, {"data": arcface_img_data_np})[0]
@@ -222,7 +222,7 @@ def generate_video_from_image_and_video(image, video_path):
 
             driven_pose_feat = motion_headpose_model(motion_pose_batch * 2 + 1)
 
-            driven_pose_feat_embed = torch.cat([driven_pose_feat['rotation'], driven_pose_feat['translation'] * 0], dim=-1) # *0 for translation as per original
+            driven_pose_feat_embed = torch.cat([driven_pose_feat['rotation'], driven_pose_feat['translation'] * 0], dim=-1)
             
             driven_feat_batch = torch.cat([motion_feature_embed, driven_pose_feat_embed.unsqueeze(1).repeat(1, motion_feature_embed.shape[1], 1)], dim=-1)
             driven_feat_batch = driven_feat_batch.unsqueeze(0) # Add batch dim for pipeline
@@ -241,10 +241,6 @@ def generate_video_from_image_and_video(image, video_path):
         driven_feat_full = torch.cat(driven_feat_all, dim=1)
 
         current_num_frames = pose_cond_tensor_full.shape[2] # Number of actual frames processed
-
-        # Padding logic (simplified, ensure it matches original intent)
-        # The original script padded `driven_video_all` which isn't directly used in the pipe call
-        # It seems padding is for `pose_cond_tensor`, `driven_feat`, `uncond_driven_feat`
         
         pose_cond_tensor_padded_list = []
         driven_feat_padded_list = []
@@ -258,7 +254,6 @@ def generate_video_from_image_and_video(image, video_path):
                 driven_feat_padded_list.append(driven_feat_full[:, :1] * weight)
                 uncond_driven_feat_padded_list.append(uncond_driven_feat_full[:, :1]) # Uncond usually stays zero or placeholder
 
-            # Add original
             pose_cond_tensor_padded_list.append(pose_cond_tensor_full)
             driven_feat_padded_list.append(driven_feat_full)
             uncond_driven_feat_padded_list.append(uncond_driven_feat_full)
