@@ -144,10 +144,11 @@ This codebase is intended solely for academic purposes.
 # 🔗 Citation 
 If you think this project is helpful, please feel free to leave a star⭐️⭐️⭐️ and cite our paper:
 ```bibtex
-@article{xu2025hunyuanportrait,
-  title={HunyuanPortrait: Implicit Condition Control for Enhanced Portrait Animation},
-  author={Xu, Zunnan and Yu, Zhentao and Zhou, Zixiang and Zhou, Jun and Jin, Xiaoyu and Hong, Fa-Ting and Ji, Xiaozhong and Zhu, Junwei and Cai, Chengfei and Tang, Shiyu and Lin, Qin and Li, Xiu and Lu, Qinglin},
-  journal={arXiv preprint arXiv:2503.18860},
+@inproceedings{xu2025hunyuanportrait,
+  title={Hunyuanportrait: Implicit condition control for enhanced portrait animation},
+  author={Xu, Zunnan and Yu, Zhentao and Zhou, Zixiang and Zhou, Jun and Jin, Xiaoyu and Hong, Fa-Ting and Ji, Xiaozhong and Zhu, Junwei and Cai, Chengfei and Tang, Shiyu and others},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={15909--15919},
   year={2025}
 }
 ``` 
