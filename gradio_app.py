@@ -299,16 +299,17 @@ def generate_video_from_image_and_video(image, video_path):
         max_guidance_scale2=cfg.max_motion_guidance_scale,
         overlap=cfg.overlap,
         shift_offset=cfg.shift_offset,
-        frames_per_batch=cfg.n_sample_frames, # Internal batching for generation
+        frames_per_batch=cfg.temporal_batch_size, # MODIFICATION: Use the new dedicated config parameter.
         num_inference_steps=cfg.num_inference_steps,
         i2i_noise_strength=cfg.i2i_noise_strength,
         arcface_embeddings=arcface_embeddings,
     ).frames
 
+    # Post-processing video frames    
     print("Pipeline generation finished.")
-    # Post-processing video frames
-    video_tensor = video_output_frames
-    video_processed = (video_tensor * 0.5 + 0.5).clamp(0, 1).cpu()
+    video_tensor = video_output_frames.cpu()
+    video_tensor.mul_(0.5).add_(0.5).clamp_(0, 1)
+    video_processed = video_tensor
 
     if cfg.pad_frames > 0:
         video_final = video_processed[:, :, cfg.pad_frames:-cfg.pad_frames]
@@ -336,10 +337,10 @@ if __name__ == "__main__":
     iface = gr.Interface(
         fn=generate_video_from_image_and_video,
         inputs=[
-            gr.Image(label="Upload Image", height=300),
-            gr.Video(label="Upload Video", height=300),
+            gr.Image(label="Upload Image", height=400),
+            gr.Video(label="Upload Video", height=400),
         ],
-        outputs=gr.Video(label="Generated Video", height=300),
+        outputs=gr.Video(label="Generated Video", height=400),
         title="HunyuanPortrait Animation",
         description="Upload a source image and a driving video to generate a new video where the image is animated by the video's motion.",
     )
@@ -348,5 +349,5 @@ if __name__ == "__main__":
     iface.launch(
         server_name='0.0.0.0', 
         server_port=8089,
-        share=True,
+        share=False,
     )

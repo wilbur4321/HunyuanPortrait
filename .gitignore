@@ -1,0 +1,6 @@
+pretrained_weights/**
+.gradio
+*.pyc
+tmp_path/
+results/
+__pycache__
