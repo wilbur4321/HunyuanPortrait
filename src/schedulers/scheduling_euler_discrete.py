@@ -72,9 +72,6 @@ class EulerDiscreteScheduler(DiffusersEulerDiscreteScheduler):
         while len(sigma.shape) < len(original_samples.shape):
             sigma = sigma.unsqueeze(-1)
 
-        # noisy_samples = original_samples + noise * sigma
-        # return noisy_samples
-
         # The original implementation `noisy_samples = original_samples + noise * sigma`
         # causes an OOM error when `original_samples` (a single reference frame) is broadcast
         # to the size of `noise` (all video frames).

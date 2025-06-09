@@ -299,7 +299,7 @@ def generate_video_from_image_and_video(image, video_path):
         max_guidance_scale2=cfg.max_motion_guidance_scale,
         overlap=cfg.overlap,
         shift_offset=cfg.shift_offset,
-        frames_per_batch=cfg.temporal_batch_size, # MODIFICATION: Use the new dedicated config parameter.
+        frames_per_batch=cfg.temporal_batch_size,
         num_inference_steps=cfg.num_inference_steps,
         i2i_noise_strength=cfg.i2i_noise_strength,
         arcface_embeddings=arcface_embeddings,

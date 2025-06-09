@@ -526,7 +526,6 @@ class HunyuanLongSVDPipeline(DiffusionPipeline):
             timestep=latent_timestep
         )
 
-        # --- MODIFICATION START ---
         # Prepare pose condition tensor and mask
         pose_cond_tensor = pose_cond_tensor.to(
             device=device, dtype=self.pose_guider.dtype
@@ -537,7 +536,6 @@ class HunyuanLongSVDPipeline(DiffusionPipeline):
         # pose_fea = self.pose_guider(pose_cond_tensor).transpose(
         #     1, 2
         # ) # (bs, f, c, H, W)
-        # --- MODIFICATION END ---
        
         # 7. Prepare guidance scale
         guidance_scale = torch.linspace(
@@ -562,10 +560,8 @@ class HunyuanLongSVDPipeline(DiffusionPipeline):
         self._num_timesteps = len(timesteps)
         shift = 0
         with self.progress_bar(total=num_inference_steps) as progress_bar:
-            # --- MODIFICATION START ---
             # Transpose the full pose_cond_tensor once before the loops for efficient slicing.
             pose_cond_tensor_transposed = pose_cond_tensor.transpose(1, 2)
-            # --- MODIFICATION END ---
             for i, t in enumerate(timesteps):
 
                 # init 
@@ -589,12 +585,10 @@ class HunyuanLongSVDPipeline(DiffusionPipeline):
                         return torch.stack(tensor_list, 1)
                     idx_list = list(range(index_start, index_start+frames_per_batch))
                     latents = indice_slice(latents_all, idx_list)
-                    # --- MODIFICATION START ---
                     # Compute pose features for the current chunk instead of all at once.
                     batch_pose_cond_transposed = indice_slice(pose_cond_tensor_transposed, idx_list)
                     batch_pose_cond = batch_pose_cond_transposed.transpose(1, 2)
                     pose_cond_fea = self.pose_guider(batch_pose_cond).transpose(1, 2)
-                    # --- MODIFICATION END ---
                     image_latents_input = indice_slice(image_latents, idx_list)
                     batch_image_embeddings = indice_slice(image_embeddings, idx_list)
                     batch_prompts = indice_slice(prompts, idx_list)
