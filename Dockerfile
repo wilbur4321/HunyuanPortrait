@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/tensorrt:24.04-py3
+FROM nvcr.io/nvidia/pytorch:25.06-py3
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -8,7 +8,7 @@ RUN apt update && \
         ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-RUN --mount=type=cache,target=/root/.cache/pip pip install torchvision torchaudio
+#RUN --mount=type=cache,target=/root/.cache/pip pip install torchvision torchaudio
 COPY requirements.txt requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
 
@@ -28,5 +28,5 @@ WORKDIR /app
 COPY . /app
 
 EXPOSE 8089
-CMD [ "python", "gradio_app.py" ]
+CMD [ "python", "-u", "gradio_app.py" ]
 
