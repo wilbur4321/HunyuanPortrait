@@ -1,0 +1,5 @@
+.gradio/
+pretrained_weights/
+results/
+**/__pycache__/
+tmp_path/
