@@ -72,7 +72,24 @@ class EulerDiscreteScheduler(DiffusersEulerDiscreteScheduler):
         while len(sigma.shape) < len(original_samples.shape):
             sigma = sigma.unsqueeze(-1)
 
-        noisy_samples = original_samples + noise * sigma
+        # The original implementation `noisy_samples = original_samples + noise * sigma`
+        # causes an OOM error when `original_samples` (a single reference frame) is broadcast
+        # to the size of `noise` (all video frames).
+        # By looping over the frames, we avoid creating a massive temporary tensor.
+
+        # Check for the specific img2vid case: single reference frame and multi-frame noise.
+        if original_samples.shape[1] == 1 and noise.shape[1] > 1:
+            # Add noise frame-by-frame to prevent large temporary tensor allocation.
+            noisy_samples = torch.empty_like(noise)
+            ref_latents = original_samples.squeeze(1)  # Shape: [B, C, H, W]
+            sigma_frame = sigma.squeeze(1)  # Shape: [B, 1, 1, 1]
+
+            for i in range(noise.shape[1]):  # Loop over the frame dimension
+                noisy_samples[:, i] = ref_latents + noise[:, i] * sigma_frame
+        else:
+            # Fallback to the original behavior for all other cases.
+            noisy_samples = original_samples + noise * sigma
+        
         return noisy_samples
 
     def step(

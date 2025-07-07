@@ -248,17 +248,21 @@ def main(cfg, args):
         max_guidance_scale2=cfg.max_motion_guidance_scale,
         overlap=cfg.overlap,
         shift_offset=cfg.shift_offset,
-        frames_per_batch=cfg.n_sample_frames,
+        frames_per_batch=cfg.temporal_batch_size,
         num_inference_steps=cfg.num_inference_steps,
         i2i_noise_strength=cfg.i2i_noise_strength,
         arcface_embeddings=arcface_embeddings,
     ).frames
-    video = (video*0.5 + 0.5).clamp(0, 1).cpu()
+
+    # Move the large tensor to CPU first to prevent OOM on the GPU during post-processing.
+    video = video.cpu()
+    # Now, perform arithmetic operations on the CPU tensor.
+    video = video.mul_(0.5).add_(0.5).clamp_(0, 1)
+    
     if cfg.pad_frames > 0:
         video = video[:, :, cfg.pad_frames:-cfg.pad_frames]
     video_clip = VideoFileClip(video_path)
     save_videos_grid(video, save_video_path, n_rows=1, fps=video_clip.fps)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
