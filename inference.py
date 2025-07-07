@@ -229,6 +229,8 @@ def main(cfg, args):
 
     num_frames_all += cfg.pad_frames * 2
 
+    # Use argument value if provided, else fallback to config
+    num_inference_steps = args.num_inference_steps if hasattr(args, 'num_inference_steps') and args.num_inference_steps is not None else cfg.num_inference_steps
     video = pipe(
         ref_img.clone(),
         transformed_images.clone(),
@@ -249,7 +251,7 @@ def main(cfg, args):
         overlap=cfg.overlap,
         shift_offset=cfg.shift_offset,
         frames_per_batch=cfg.temporal_batch_size,
-        num_inference_steps=cfg.num_inference_steps,
+        num_inference_steps=num_inference_steps,
         i2i_noise_strength=cfg.i2i_noise_strength,
         arcface_embeddings=arcface_embeddings,
     ).frames
@@ -269,6 +271,7 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=str, default="./config/hunyuan-portrait.yaml")
     parser.add_argument("--video_path", type=str, default="./driving_video.mp4")
     parser.add_argument("--image_path", type=str, default='./source_image.png')
+    parser.add_argument("--num-inference-steps", type=int, default=None, help="Number of inference steps (overrides config if specified)")
     args = parser.parse_args()
 
     cfg = OmegaConf.load(args.config)
