@@ -162,9 +162,10 @@ print("Models initialized successfully.")
 # --- End of Global Initializations ---
 
 @torch.no_grad()
-def generate_video_from_image_and_video(image, video_path):
+def generate_video_from_image_and_video(image, video_path, num_inference_steps=None):
     """
     Generates a video based on a source image and a driving video.
+    Accepts num_inference_steps for controlling inference steps.
     """
     print("Starting video generation process...")
 
@@ -278,7 +279,10 @@ def generate_video_from_image_and_video(image, video_path):
         print(f"Error message: {e}")
         raise gr.Error(f"An internal error occurred: {e}")        
 
-    print(f"Calling generation pipeline with {num_frames_for_pipe} target frames...")
+    # Use slider value if provided, else fallback to config
+    if num_inference_steps is None:
+        num_inference_steps = cfg.num_inference_steps
+    print(f"Calling generation pipeline with {num_frames_for_pipe} target frames and num_inference_steps={num_inference_steps}...")
     # Ensure dtypes of inputs to the pipe are correct
     video_output_frames = pipe(
         ref_img.clone(), # Ensure clone if modified
@@ -300,7 +304,7 @@ def generate_video_from_image_and_video(image, video_path):
         overlap=cfg.overlap,
         shift_offset=cfg.shift_offset,
         frames_per_batch=cfg.temporal_batch_size,
-        num_inference_steps=cfg.num_inference_steps,
+        num_inference_steps=num_inference_steps,
         i2i_noise_strength=cfg.i2i_noise_strength,
         arcface_embeddings=arcface_embeddings,
     ).frames
@@ -339,6 +343,14 @@ if __name__ == "__main__":
         inputs=[
             gr.Image(label="Upload Image", height=400),
             gr.Video(label="Upload Video", height=400),
+            gr.Slider(
+                minimum=1,
+                maximum=30,
+                value=cfg.num_inference_steps,
+                step=1,
+                label="Number of Inference Steps",
+                info="Controls the number of denoising steps (higher = slower, better quality)",
+            ),
         ],
         outputs=gr.Video(label="Generated Video", height=400),
         title="HunyuanPortrait Animation",
